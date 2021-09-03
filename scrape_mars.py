@@ -29,7 +29,6 @@ def scrape():
 
     # In[ ]:
 
-
     # Visiting the website
     redplanetscience = 'https://redplanetscience.com/'
 
@@ -47,16 +46,16 @@ def scrape():
         results = soup.find_all('div', class_='col-md-8')
 
         # scrape loop
-        for result in results:
+        # for result in results:
+	
+        # Parent div for article title and teaser paragraph
+        news_title = soup.find_all('div', class_='content_title')[0].text
+        news_p = soup.find_all('div', class_='article_teaser_body')[0].text
 
-            # Parent div for article title and teaser paragraph
-            news_title = result.find('div', class_='content_title').text.strip()
-            news_p = result.find('div', class_='article_teaser_body').text.strip()
-
-            # Prints
-            print('---------------------------------')
-            print(news_title)
-            print(news_p)
+        # Prints
+        print('---------------------------------')
+        print(news_title)
+        print(news_p)
 
 
     # ## JPL Mars Space Images - Featured Image
@@ -181,4 +180,11 @@ def scrape():
 
 
 # In[ ]
-# Instance for Flask
+# one big dictionary
+
+    mars_dict = {"headline": news_title,
+                "paragraph": news_p,
+                "featured_image_url": featured_image_url,
+                "mars_fact_table": mars_fact_table,
+                "mars_hemispheres": hemisphere_img_dict
+            }
