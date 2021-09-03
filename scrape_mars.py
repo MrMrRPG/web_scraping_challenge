@@ -9,6 +9,7 @@ import os
 from splinter import Browser
 from bs4 import BeautifulSoup
 from webdriver_manager.chrome import ChromeDriverManager
+from flask import Flask, render_template
 import requests
 import pandas as pd
 import pymongo
@@ -16,161 +17,168 @@ import pymongo
 
 # In[ ]:
 
+# The Scrape Function
+def scrape():
 
-# Activating ChromeDriverManager
-executable_path = {'executable_path': ChromeDriverManager().install()}
-browser = Browser('chrome', **executable_path, headless=False)
+    # Activating ChromeDriverManager
+    executable_path = {'executable_path': ChromeDriverManager().install()}
+    browser = Browser('chrome', **executable_path, headless=False)
 
 
-# ## Mars News Titles
+    # ## Mars News Titles
 
-# In[ ]:
+    # In[ ]:
 
 
-# Visiting the website
-redplanetscience = 'https://redplanetscience.com/'
+    # Visiting the website
+    redplanetscience = 'https://redplanetscience.com/'
 
-# response = requests.get(redplanetscience)
-browser.visit(redplanetscience)
+    # response = requests.get(redplanetscience)
+    browser.visit(redplanetscience)
 
 
-# In[ ]:
+    # In[ ]:
 
 
-for x in range(1):
-	# Definitions
-	html = browser.html
-	soup = BeautifulSoup(html, 'html.parser')
-	results = soup.find_all('div', class_='col-md-8')
+    for x in range(1):
+        # Definitions
+        html = browser.html
+        soup = BeautifulSoup(html, 'html.parser')
+        results = soup.find_all('div', class_='col-md-8')
 
-	# scrape loop
-	for result in results:
+        # scrape loop
+        for result in results:
 
-		# Parent div for article title and teaser paragraph
-		news_title = result.find('div', class_='content_title').text.strip()
-		news_p = result.find('div', class_='article_teaser_body').text.strip()
+            # Parent div for article title and teaser paragraph
+            news_title = result.find('div', class_='content_title').text.strip()
+            news_p = result.find('div', class_='article_teaser_body').text.strip()
 
-		# Prints
-		print('---------------------------------')
-		print(news_title)
-		print(news_p)
+            # Prints
+            print('---------------------------------')
+            print(news_title)
+            print(news_p)
 
 
-# ## JPL Mars Space Images - Featured Image
+    # ## JPL Mars Space Images - Featured Image
 
-# In[ ]:
+    # In[ ]:
 
 
-spaceimages = 'http://spaceimages-mars.com/'
-browser.visit(spaceimages)
+    spaceimages = 'http://spaceimages-mars.com/'
+    browser.visit(spaceimages)
 
 
-# In[ ]:
+    # In[ ]:
 
 
-for x in range(1):
-	# Definitions
-	html = browser.html
-	soup = BeautifulSoup(html, 'html.parser')
-	results = soup.find_all('div', class_='floating_text_area')
+    for x in range(1):
+        # Definitions
+        html = browser.html
+        soup = BeautifulSoup(html, 'html.parser')
+        results = soup.find_all('div', class_='floating_text_area')
 
-	# scrape loop
-	for result in results:
+        # scrape loop
+        for result in results:
 
-		# Find featured image
-		a = result.find('a')
-		href = a['href']
+            # Find featured image
+            a = result.find('a')
+            href = a['href']
 
-		# Prints
-		print('---------------------------------')
-		print(f"Link to Featured Space Image: {spaceimages}{href}")
+            # Prints
+            print('---------------------------------')
+            print(f"Link to Featured Space Image: {spaceimages}{href}")
 
-featured_image_url = spaceimages + href
+    featured_image_url = spaceimages + href
 
 
-# ## Mars Facts
+    # ## Mars Facts
 
-# In[ ]:
+    # In[ ]:
 
 
-galaxyfacts_mars = 'https://galaxyfacts-mars.com/'
+    galaxyfacts_mars = 'https://galaxyfacts-mars.com/'
 
 
-# In[ ]:
+    # In[ ]:
 
 
-mars_tables = pd.read_html(galaxyfacts_mars)
-mars_tables
+    mars_tables = pd.read_html(galaxyfacts_mars)
+    mars_tables
 
 
-# In[ ]:
+    # In[ ]:
 
 
-mars_fact_table = mars_tables[1]
-mars_fact_table
+    mars_fact_table = mars_tables[1]
+    mars_fact_table
 
 
-# ## Mars Hemispheres
+    # ## Mars Hemispheres
 
-# In[ ]:
+    # In[ ]:
 
 
-marshemispheres = 'http://marshemispheres.com/'
-browser.visit(marshemispheres)
+    marshemispheres = 'http://marshemispheres.com/'
+    browser.visit(marshemispheres)
 
 
-# In[ ]:
+    # In[ ]:
 
 
-for x in range(1):
-    # Definitions
-    html = browser.html
-    soup = BeautifulSoup(html, 'html.parser')
-    results = soup.find_all('div', class_='item')
+    for x in range(1):
+        # Definitions
+        html = browser.html
+        soup = BeautifulSoup(html, 'html.parser')
+        results = soup.find_all('div', class_='item')
 
-    hemisphere_list = []
-    img_url_list = []
-    hemisphere_img_dict =[] 
+        hemisphere_list = []
+        img_url_list = []
+        hemisphere_img_dict =[] 
 
-    # scrape loop
-    for result in results:
+        # scrape loop
+        for result in results:
 
-        # Find featured image and URL
-        hem=result.find('div',class_='description')
-        title=hem.h3.text
-        a = result.find('a')
-        href = a['href']
-        img = a.find('img')
-        src = img['src']
-        alt = img['alt']
+            # Find featured image and URL
+            hem=result.find('div',class_='description')
+            title=hem.h3.text
+            a = result.find('a')
+            href = a['href']
+            img = a.find('img')
+            src = img['src']
+            alt = img['alt']
 
-        # Getting rid of unwanted words in the statement
-        word_list = ["Enhanced", "  "]
+            # Getting rid of unwanted words in the statement
+            word_list = ["Enhanced", "  "]
 
-        for word in word_list:
-            hemisphere = title.replace(word, "") 
-             
-        img_url = marshemispheres + src
+            for word in word_list:
+                hemisphere = title.replace(word, "") 
+                
+            img_url = marshemispheres + src
 
-        # Prints
-        print('---------------------------------')
-        # print('alt')
-        print(f"{hemisphere}:")
-        print(f"{img_url}")
+            # Prints
+            print('---------------------------------')
+            # print('alt')
+            print(f"{hemisphere}:")
+            print(f"{img_url}")
 
-        # Dictionary appends
-        dict={'title':hemisphere,'image_url':img_url}
-        hemisphere_img_dict.append(dict)
+            # Dictionary appends
+            dict={'title':hemisphere,'image_url':img_url}
+            hemisphere_img_dict.append(dict)
 
 
-# In[ ]:
+    # In[ ]:
 
+    # Display newly created list of dictionaries
+    hemisphere_img_dict
 
-hemisphere_img_dict
 
+    # In[ ]:
 
-# In[ ]:
+    # quit browser
+    browser.quit()
 
+    return hemisphere_img_dict
 
-browser.quit()
 
+# In[ ]
+# Instance for Flask
