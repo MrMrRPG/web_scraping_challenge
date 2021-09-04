@@ -105,10 +105,13 @@ def scrape():
     mars_tables
 
 
+    mars_table = mars_tables[1].rename(columns={0:'Description', 1:'Mars'})
+
     # In[ ]:
 
 
-    mars_fact_table = mars_tables[1]
+    mars_fact_table = mars_table.to_html()
+    mars_fact_table = mars_fact_table.replace('\n', '')
     mars_fact_table
 
 
@@ -176,7 +179,6 @@ def scrape():
     # quit browser
     browser.quit()
 
-    return hemisphere_img_dict
 
 
 # In[ ]
@@ -187,4 +189,6 @@ def scrape():
                 "featured_image_url": featured_image_url,
                 "mars_fact_table": mars_fact_table,
                 "mars_hemispheres": hemisphere_img_dict
+
             }
+    return mars_dict
