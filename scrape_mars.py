@@ -177,12 +177,7 @@ def scrape():
     # In[ ]:
 
     # quit browser
-    browser.quit()
 
-
-
-# In[ ]
-# one big dictionary
 
     mars_dict = {"headline": news_title,
                 "paragraph": news_p,
@@ -191,4 +186,8 @@ def scrape():
                 "mars_hemispheres": hemisphere_img_dict
 
             }
+
+
+
+    browser.quit()
     return mars_dict
