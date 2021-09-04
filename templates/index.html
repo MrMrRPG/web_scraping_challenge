@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Scrape Mars Data!</title>
-    <link
+    <!-- <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-    />
+    /> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
   </head>
 
   <body>
     <div class="container">
       <div class="jumbotron text-center">
-        <h1>Mars Info</h1>
+        <h1>Mars Information Center</h1>
         <p>
           <a class="btn btn-primary btn-lg" href="/scrape" role="button"
             >Scrape New Data!</a
@@ -23,12 +25,35 @@
       </div>
     </div>
 
-    <div class="craiglist-listings">
+    <div class="container">
       <h1>Latest Mars News</h1>
       <div>
-        <h3 class="heading">{{ mars_dict.news_title }}</h3>
-        <h5 class="paragraph">{{ mars_dict.news_p }}</h5>
+        <h3 class="heading">{{ mars_dict.headline }}</h3>
+        <p class="paragraph">{{ mars_dict.paragraph }}</p>
       </div>
     </div>
+
+
+    <div class = "container">
+      <h1>Featured Mars Image</h1>
+      <div class = "image">
+        <img src="{{ mars_dict.featured_image_url }}" alt="{{ mars_dict.featured_image_url }}">
+      </div>
+    </div>
+
+    <div class = "container">
+      <h1>Mars Facts Table</h1>
+      <div class = "table">
+        {{mars_dict.mars_fact_table | safe}}
+    </div>
+
+    <div class = "container">
+      <h1>Mars Hemispheres</h1>
+      <div class = "mars_hemisphere_images">
+        
+      </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
   </body>
 </html>

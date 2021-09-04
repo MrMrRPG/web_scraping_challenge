@@ -184,7 +184,6 @@ def scrape():
                 "featured_image_url": featured_image_url,
                 "mars_fact_table": mars_fact_table,
                 "mars_hemispheres": hemisphere_img_dict
-
             }
 
 
