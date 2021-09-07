@@ -20,59 +20,59 @@
         <div class="jumbotron text-center">
             <h1>Mars Information Center</h1>
             <p>
-                <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data!</a
-          >
-        </p>
-      </div>
+                <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data!</a>
+            </p>
+        </div>
     </div>
 
     <div class="container">
-      <h1>Latest Mars News</h1>
-      <div>
-        <h3 class="heading">{{ mars_dict.headline }}</h3>
-        <p class="paragraph">{{ mars_dict.paragraph }}</p>
-      </div>
+        <h1>Latest Mars News</h1>
+        <div>
+            <h3 class="heading">{{ mars_dict.headline }}</h3>
+            <p class="paragraph">{{ mars_dict.paragraph }}</p>
+        </div>
     </div>
 
 
-    <div class = "container">
-      <h1>Featured Mars Image</h1>
-      <div class = "image">
-        <img src="{{ mars_dict.featured_image_url }}" alt="{{ mars_dict.featured_image_url }}">
-      </div>
+    <div class="container">
+        <h1>Featured Mars Image</h1>
+        <div class="image">
+            <img src="{{ mars_dict.featured_image_url }}" alt="{{ mars_dict.featured_image_url }}">
+        </div>
     </div>
 
-    <div class = "container">
-      <h1>Mars Facts Table</h1>
-      <div class = "table">
-        {{mars_dict.mars_fact_table | safe}}
-    </div>
+    <div class="container">
+        <h1>Mars Facts Table</h1>
+        <div class="table">
+            {{mars_dict.mars_fact_table | safe}}
+        </div>
 
-    <hr>
-  <div class="row">
-    <div class="col-md-8 offset-4">
-      <h2 class="align-items-center"><u>Mars hemispheres</u></h2>
-    </div>
-  </div>
-  </br>
-  <div class="row">
-          {% for hem in mars_dict.mars_hemispheres %} 
+        <hr>
+        <div class="row">
+            <div class="col-md-8 offset-4">
+                <h2 class="align-items-center"><u>Mars hemispheres</u></h2>
+            </div>
+        </div>
+        </br>
+        <div class="row">
+            {% for hem in mars_dict.mars_hemispheres %}
             <div class="col-6 border">
-            </br>
-                  <div>
-                    <img width="300 px" height="300 px" src="{{hem.image_url}}">
-                  </div>
+                </br>
+                <div>
+                    <img width="300 px" height="300 px" class="center" src="{{hem.image_url}}">
+                </div>
 
-                  <div>
+                <div>
                     <h4> {{hem.title}} </h4>
-                  </div>
+                </div>
 
             </div>
-          {% endfor %}
-  </div> 
+            {% endfor %}
+        </div>
 
-<hr>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
-  </body>
+        <hr>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+</body>
+
 </html>
